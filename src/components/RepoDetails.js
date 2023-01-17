@@ -7,7 +7,7 @@ const RepoDetails = ({ details }) => {
             <a target="_blank" href={html_url} className="accent text-lg lg:text-2xl">
                 <h3> {name} </h3>
             </a>
-            {description && <div>{description}</div>}
+            {description && <div> {description} </div>}
         </div>
     );
 };
