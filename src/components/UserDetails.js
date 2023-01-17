@@ -5,9 +5,8 @@ import RepoDetails from "./RepoDetails";
 import SearchPrompt from "./Prompt";
 import Pagination from "./Pagination";
 
-const UserDetails = ({ user, repo }) => {
+const UserDetails = ({ user, repo, currentPage, setCurrentPage }) => {
     const { avatar_url, name, html_url, login, followers, following } = user;
-    const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 3;
 
     const getCurrentPageData = () => {

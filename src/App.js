@@ -9,6 +9,7 @@ function App() {
     const [noUserFound, setNoUserFound] = useState(false);
     const [user, setUser] = useState(null);
     const [repo, setRepo] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const getUser = async (username) => {
         if (!username) return;
@@ -22,7 +23,7 @@ function App() {
             return;
         }
         setUser(data);
-
+        if(currentPage !== 1 )setCurrentPage(1)
         const rePoResponse = await fetch(data?.repos_url);
         const repoData = await rePoResponse.json();
         setRepo(repoData);
@@ -35,7 +36,7 @@ function App() {
             <Header getUser={getUser} />
             {!user && !noUserFound && <Prompt type={"search"} />}
             {noUserFound && <Prompt type={"user"} />}
-            {user && <UserDetails user={user} repo={repo} />}
+            {user && <UserDetails user={user} repo={repo} currentPage={currentPage} setCurrentPage={setCurrentPage} />}
             {isFetching && <Spinner />}
         </>
     );
