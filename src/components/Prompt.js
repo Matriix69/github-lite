@@ -19,7 +19,7 @@ const SearchPrompt = ({ type, notFullSreen }) => {
     };
 
     return (
-        <div className={` flex items-center justify-center ${!notFullSreen ? "min-h-screen" : "min-h-full"} `}>
+        <div className={`flex items-center justify-center ${!notFullSreen ? "min-h-screen" : "min-h-full"} `}>
             <div className={`flex flex-col items-center justify-center h-full ${!notFullSreen ? "mt-[-72px]" : ""}`}>
                 <div className="mb-6">{types[type]?.icon}</div>
                 <div className="max-w-[210px] mx-auto text-center text-[#808080] text-base sm:text-[22px] leading-6 sm:leading-8">
