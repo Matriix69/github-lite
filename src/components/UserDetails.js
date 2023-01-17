@@ -16,7 +16,7 @@ const UserDetails = ({ user, repo }) => {
     };
 
     return (
-        <div className="max-width mx-auto px-6 mt-10">
+        <div className="max-width mx-auto px-6 my-10">
             <div className="grid lg:grid-cols-[320px_1fr] gap-20 items-start">
                 <div className="flex flex-col items-center lg:items-start">
                     <img src={avatar_url} className="bg-gray-200 h-[280px] w-[280px] rounded-full mb-7 object-cover" />
