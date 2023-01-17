@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactComponent as Shared } from "../assets/shared.svg";
 import { ReactComponent as Provate } from "../assets/provate.svg";
 import RepoDetails from "./RepoDetails";
 import SearchPrompt from "./Prompt";
 import Pagination from "./Pagination";
 
-const UserDetails = ({ user, repo, currentPage, setCurrentPage }) => {
+const UserDetails = ({ user, repo }) => {
     const { avatar_url, name, html_url, login, followers, following } = user;
+    const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 3;
 
     const getCurrentPageData = () => {
         const currentPageData = repo.slice((currentPage - 1) * pageSize, currentPage * pageSize);
         return currentPageData;
     };
+
+    useEffect(() => {
+        if(currentPage !== 1 ) setCurrentPage(1)
+    }, [user])
 
     return (
         <div className="max-width mx-auto px-6 my-10">

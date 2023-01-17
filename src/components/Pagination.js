@@ -40,7 +40,7 @@ const Pagination = ({ dataSize, pageSize, currentPage, setCurrentPage }) => {
                     </button>
                 </li>
 
-                {currentPage !== 1 && (
+                {currentPage !== 1 && !pages.includes(1) && (
                     <>
                         <li>
                             <button onClick={() => handleClick(1)}>1</button>
@@ -59,7 +59,7 @@ const Pagination = ({ dataSize, pageSize, currentPage, setCurrentPage }) => {
                         </button>
                     </li>
                 ))}
-                {currentPage !== totalPages && (
+                {currentPage !== totalPages && !pages.includes(totalPages) && (
                     <>
                         <span>...</span>
                         <li>

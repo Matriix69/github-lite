@@ -9,26 +9,26 @@ function App() {
     const [noUserFound, setNoUserFound] = useState(false);
     const [user, setUser] = useState(null);
     const [repo, setRepo] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
 
     const getUser = async (username) => {
         if (!username) return;
-        setIsFetching(true);
-        const response = await fetch(`https://api.github.com/users/${username}`);
-        const data = await response.json();
-        if (data?.message === "Not Found") {
-            if (user) setUser(null);
-            setNoUserFound(true);
+        try {
+            setIsFetching(true);
+            const response = await fetch(`https://api.github.com/users/${username}`);
+            const data = await response.json();
+            if (data?.message === "Not Found") {
+                if (user) setUser(null);
+                setNoUserFound(true);
+                setIsFetching(false);
+                return;
+            }
+            setUser(data);
+            const rePoResponse = await fetch(data?.repos_url);
+            const repoData = await rePoResponse.json();
+            setRepo(repoData);
             setIsFetching(false);
-            return;
-        }
-        setUser(data);
-        if(currentPage !== 1 )setCurrentPage(1)
-        const rePoResponse = await fetch(data?.repos_url);
-        const repoData = await rePoResponse.json();
-        setRepo(repoData);
-        setIsFetching(false);
-        if (noUserFound) setNoUserFound(false);
+            if (noUserFound) setNoUserFound(false);
+        } catch (error) {}
     };
 
     return (
@@ -36,7 +36,7 @@ function App() {
             <Header getUser={getUser} />
             {!user && !noUserFound && <Prompt type={"search"} />}
             {noUserFound && <Prompt type={"user"} />}
-            {user && <UserDetails user={user} repo={repo} currentPage={currentPage} setCurrentPage={setCurrentPage} />}
+            {user && <UserDetails user={user} repo={repo} />}
             {isFetching && <Spinner />}
         </>
     );
