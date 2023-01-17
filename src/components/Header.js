@@ -13,7 +13,7 @@ const Header = ({ getUser }) => {
                         className="h-full w-full outline-none border-none border-hidden text-[14px]"
                         placeholder="Enter GitHub username"
                         onKeyDown={(e) => {
-                            if (e.code === "Enter") {
+                            if (e.code === "Enter" || e?.keyCode === 13) {
                                 e.preventDefault();
                                 getUser(e.target.value);
                             }
